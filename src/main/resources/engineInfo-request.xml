@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:us="http://spring.io/guides/soap-qe">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <us:getEngineInfoReturn/>
+
+    </soapenv:Body>
+
+</soapenv:Envelope>

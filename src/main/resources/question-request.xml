@@ -1,0 +1,11 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:us="http://spring.io/guides/soap-qe">
+<soapenv:Header/>
+    <soapenv:Body>
+        <us:getQuestionRequest>
+            <us:id>1</us:id>
+        </us:getQuestionRequest>
+
+    </soapenv:Body>
+
+</soapenv:Envelope>
