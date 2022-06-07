@@ -36,7 +36,11 @@ public class GetQuestionMetadataRequest {
     protected String questionBaseURL;
 
     public String getQuestionID() {
-        return questionID;
+
+        String etutorQuestionId = questionID.replace("_", "-");
+        etutorQuestionId = etutorQuestionId.replace("moodle","");
+        return etutorQuestionId;
+
     }
 
     public String getQuestionVersion() {

@@ -23,7 +23,6 @@ public class ProcessReturn implements java.io.Serializable {
 
     private Results results;
 
-    public ProcessReturn(){};
 
     public ProcessReturn(String CSS, String XHTML, String progressInfo, boolean questionEnd, Resource[] resources, Results results) {
 
@@ -33,6 +32,14 @@ public class ProcessReturn implements java.io.Serializable {
         this.questionEnd = questionEnd;
         this.resources = resources;
         this.results = results;
+    }
+    public ProcessReturn() {
+        this.CSS = "";
+        this.XHTML = "";
+        this.progressInfo = "";
+        this.questionEnd = false;
+        this.resources = null;
+        this.results = null;
     }
 
     public String getCSS() {

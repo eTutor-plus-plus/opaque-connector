@@ -8,6 +8,7 @@
 
 package io.spring.guides.soap_qe;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -39,7 +40,7 @@ import io.spring.guides.soap_qe.Engineinfo;
     "engineinfo"
 })
 @XmlRootElement(name = "getEngineInfoResponse")
-public class GetEngineInfoResponse {
+public class GetEngineInfoResponse  {
 
     @XmlElement(required = true)
     protected String engineinfo;

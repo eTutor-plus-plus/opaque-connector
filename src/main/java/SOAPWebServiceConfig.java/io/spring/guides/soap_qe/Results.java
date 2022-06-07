@@ -7,7 +7,12 @@
 
 package SOAPWebServiceConfig.java.io.spring.guides.soap_qe;
 
-public class Results implements java.io.Serializable {
+import javax.xml.bind.annotation.*;
+import java.io.Serializable;
+
+@XmlRootElement(name = "results")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Results implements Serializable {
     private String actionSummary;
 
     private String answerLine;
@@ -18,8 +23,19 @@ public class Results implements java.io.Serializable {
 
     private CustomResult[] customResults;
 
-    private Score[] scores;
+    @XmlElementWrapper(name = "scores")
+    @XmlElement(name = "score")
+    public Score[] scores;
 
+    public Results(){
+        actionSummary = "";
+        answerLine = "";
+        attempts = 0;
+        questionLine = "";
+        customResults = null;
+        scores = new Score[1];;
+
+    }
 
     public Results(String actionSummary, String answerLine, int attempts, String questionLine, CustomResult[] customResults, Score[] scores) {
         this.actionSummary = actionSummary;
@@ -77,4 +93,5 @@ public class Results implements java.io.Serializable {
     public void setScores(Score[] scores) {
         this.scores = scores;
     }
+
 }

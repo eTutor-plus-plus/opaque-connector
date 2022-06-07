@@ -19,8 +19,7 @@ public class StartReturn implements java.io.Serializable {
     private Resource[] resources;
 
 
-    public StartReturn(
-            ) {
+    public StartReturn() {
         this.CSS = "";
         this.XHTML = "";
         this.progressInfo = "";

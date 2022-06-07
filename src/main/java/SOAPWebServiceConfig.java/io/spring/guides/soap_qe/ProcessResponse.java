@@ -6,6 +6,10 @@ import javax.xml.bind.annotation.*;
 @XmlType(name = "")
 @XmlRootElement(name = "ProcessResponse", namespace = "http://om.open.ac.uk/")
 public class ProcessResponse {
+
+    public ProcessResponse() {
+    }
+
     @XmlElement(required = true)
 
     ProcessReturn processReturn = new ProcessReturn();

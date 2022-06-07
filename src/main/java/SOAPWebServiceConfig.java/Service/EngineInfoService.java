@@ -11,13 +11,9 @@ public class EngineInfoService {
     Engineinfo result = new Engineinfo();
 
     @PostConstruct
-    public void intitalize(){
+    public void intitalize() {
 
-        result.setEngineInfoResult("<engineinfo>\n" +
-                "    <name>[question engine]</name> ''<!-- Required -->''\n" +
-                "    <usedmemory>['123 bytes' or '45 KB' or '67 MB']</usedmemory> ''<!-- Optional-->''\n" +
-                "    <activesessions>[Number of question sessions active]</activesessions> ''<!-- Optional-->''\n" +
-                "</engineinfo>");
+        result.setEngineInfoResult("<engineinfo>\n" + "    <name>[Etutor++ Connector]</name>\n" + "</engineinfo>");
     }
 
     public Engineinfo getEngineResponse() {

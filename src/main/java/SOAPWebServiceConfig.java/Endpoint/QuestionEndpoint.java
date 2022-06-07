@@ -1,10 +1,6 @@
 package SOAPWebServiceConfig.java.Endpoint;
 
 import SOAPWebServiceConfig.java.Service.EngineInfoService;
-import SOAPWebServiceConfig.java.Service.QuestionMetaService;
-import SOAPWebServiceConfig.java.io.spring.guides.soap_qe.GetQuestionMetadataRequest;
-import SOAPWebServiceConfig.java.io.spring.guides.soap_qe.GetQuestionMetadataResponse;
-import SOAPWebServiceConfig.java.io.spring.guides.soap_qe.QuestionMetaData;
 import io.spring.guides.soap_qe.GetEngineInfoRequest;
 import io.spring.guides.soap_qe.GetEngineInfoResponse;
 import org.springframework.beans.factory.annotation.Autowired;
