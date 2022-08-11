@@ -1,6 +1,7 @@
 package connector.service;
 
 import connector.dto.opaque.Engineinfo;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -15,8 +16,7 @@ public class EngineInfoService {
 
     @PostConstruct
     public void intitalize() {
-
-        result.setEngineInfoResult("<engineinfo>\n" + "    <name>[Etutor++ Connector]</name>\n" + "</engineinfo>");
+        result.setEngineInfoResult("<engineinfo>\n" + "    <name> [Etutor++ Connector]</name>\n" + "</engineinfo>");
     }
 
     public Engineinfo getEngineResponse() {

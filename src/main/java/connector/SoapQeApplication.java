@@ -7,6 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SoapQeApplication {
 
-	public static void main(String[] args) {SpringApplication.run(SoapQeApplication.class, args);}
+	public static void main(String[] args) {
+		SpringApplication.run(SoapQeApplication.class, args);
+
+		}
 
 }

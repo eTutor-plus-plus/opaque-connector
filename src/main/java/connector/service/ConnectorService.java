@@ -8,6 +8,10 @@ import connector.dto.etutorpp.EtutorResult;
 import connector.dto.etutorpp.Submission;
 import connector.dto.etutorpp.SubmissionResponse;
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,6 +23,7 @@ import java.nio.charset.StandardCharsets;
 /**
  *   Service, which sends requests to etutor system
  */
+@Service
 public class ConnectorService {
 
     /**
@@ -143,13 +148,29 @@ public class ConnectorService {
 
     }
 
+    // Get values from application.properties
+    @Value("${ETPPUSER}")
+    String etppuser;
+    @Value("${ETPPPASSWORD}")
+    String etpppassword;
+
+    static String auth;
+
+    /**
+     * Initialize auth parameter
+     */
+    @PostConstruct
+    public void intitalize() {
+        auth = etppuser + ":" + etpppassword;
+         }
 
     /**
      * Create AuthenticationHeader
      * @return
      */
+
     private static final String getBasicAuthenticationHeader() {
-        String auth = "admin:admin";
+
         byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.UTF_8));
         String authHeaderValue = "Basic " + new String(encodedAuth);
         return authHeaderValue;
