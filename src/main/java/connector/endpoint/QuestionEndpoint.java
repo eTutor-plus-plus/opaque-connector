@@ -12,6 +12,9 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import javax.xml.soap.SOAPException;
 
 
+/**
+ *   Endpoint, which is called from opaque to ask for engineInfo
+ */
 @Endpoint
 public class QuestionEndpoint {
 

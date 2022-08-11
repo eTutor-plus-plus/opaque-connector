@@ -3,10 +3,9 @@ package connector.dto.etutorpp;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
- * Class for a new task assignment.
- *
- * @author fne
+ * DTO class for received questions from etutor system
  */
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Task {
 

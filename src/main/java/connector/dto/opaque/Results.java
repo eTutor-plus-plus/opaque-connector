@@ -1,14 +1,13 @@
-/**
- * StartReturn.java
- *
- * This file was auto-generated from WSDL
- * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
- */
 
 package connector.dto.opaque;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+
+
+/**
+ *  class for result object
+ */
 
 @XmlRootElement(name = "results")
 @XmlAccessorType(XmlAccessType.FIELD)

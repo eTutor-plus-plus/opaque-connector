@@ -3,6 +3,10 @@ package connector.dto.opaque;
 
 import javax.xml.bind.annotation.*;
 
+/**
+ *  class for questionMetaData sent to opaque
+ */
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 @XmlRootElement(name = "getQuestionMetadataResponse", namespace = "http://om.open.ac.uk/")

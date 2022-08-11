@@ -6,6 +6,10 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ *   class for start request from opaque
+ */
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 @XmlRootElement(name = "start", namespace = "http://om.open.ac.uk/")

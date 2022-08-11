@@ -12,6 +12,9 @@ import java.net.URISyntaxException;
 import java.util.UUID;
 
 
+/**
+ * Service to initialize question at the start of an quiz
+ */
 @Service
 public class QuestionStartService {
 
@@ -30,7 +33,7 @@ public class QuestionStartService {
         Task task = cs.getTaskInfo(request);
 
         startReturn.setQuestionSession(UUID.randomUUID().toString());
-        //TODO Language Database erstellen
+
         startReturn.setXHTML(
                 task.getInstruction() +
                         "<div class =\"answer\">" +

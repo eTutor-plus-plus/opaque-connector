@@ -2,6 +2,10 @@ package connector.dto.opaque;
 
 import javax.xml.bind.annotation.*;
 
+/**
+ *   class for process request from opaque
+ */
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 @XmlRootElement(name = "process", namespace = "http://om.open.ac.uk/")

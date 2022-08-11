@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 
+/**
+ *   Endpoint, which is called from opaque to start/initialize a question
+ */
 @Endpoint
 public class QuestionStartEndpoint {
 
@@ -25,8 +28,6 @@ public class QuestionStartEndpoint {
 
     @ResponsePayload
     public StartResponse start(@RequestPayload StartRequest request) throws SOAPException, IOException, ClassNotFoundException, InterruptedException, URISyntaxException {
-
-
 
         StartResponse response = new StartResponse();
         response.setStartReturn(startService.getStartReturn(request));

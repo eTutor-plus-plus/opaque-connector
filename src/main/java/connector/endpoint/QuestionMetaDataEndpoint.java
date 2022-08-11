@@ -15,6 +15,9 @@ import javax.xml.soap.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+/**
+ *   Endpoint, which is called from opaque to ask for questionMetaData
+ */
 @Endpoint
 public class QuestionMetaDataEndpoint {
 

@@ -1,5 +1,9 @@
 package connector.dto.opaque;
 
+/**
+ *  class for customresults in opaque
+ */
+
 public class CustomResult {
 
     String name;

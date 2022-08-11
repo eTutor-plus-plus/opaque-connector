@@ -19,11 +19,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * Service for processing questions
+ */
 @Service
 public class QuestionProcessService {
-
-    //TODO - Diagnoselevel in Config
-    //TODO Exception handling
 
     private ConnectorService cs = new ConnectorService();
 
@@ -32,6 +32,14 @@ public class QuestionProcessService {
 
     }
 
+    /**
+     * Method for processing question
+     * @param request contains answer infos
+     * @return processReturn object contained in processResponse sent to opaque
+     * @throws IOException
+     * @throws URISyntaxException
+     * @throws InterruptedException
+     */
     public ProcessReturn getProcessReturn(ProcessRequest request) throws IOException, URISyntaxException, InterruptedException {
 
         ProcessReturn processReturn = new ProcessReturn();
@@ -121,6 +129,15 @@ public class QuestionProcessService {
         return processReturn;
     }
 
+    /**
+     * Method for creating the question UI
+     * @param questionAttempt contains infos about the question
+     * @param answer boolean if question has answer
+     * @param submit boolean if question is submitted
+     * @param finish boolean if question is already finished
+     * @param result contains the feedback which should be displayed
+     * @return
+     */
     private String createHtml(QuestionAttempt questionAttempt, boolean answer, boolean submit, boolean finish, EtutorResult result) {
 
         StringBuilder html = new StringBuilder();

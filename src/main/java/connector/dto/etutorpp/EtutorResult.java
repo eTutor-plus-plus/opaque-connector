@@ -2,7 +2,12 @@ package connector.dto.etutorpp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * DTO class for received results from etutor system
+ */
+
 @JsonIgnoreProperties(ignoreUnknown = true)
+
 public class EtutorResult {
 
 

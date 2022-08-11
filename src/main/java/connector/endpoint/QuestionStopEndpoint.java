@@ -11,6 +11,9 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import javax.xml.soap.SOAPException;
 
+/**
+ *   Endpoint, which is called from opaque to stop a question
+ */
 @Endpoint
 public class QuestionStopEndpoint {
     @Autowired

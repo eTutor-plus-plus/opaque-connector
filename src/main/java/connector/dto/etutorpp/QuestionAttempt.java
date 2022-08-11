@@ -1,5 +1,8 @@
 package connector.dto.etutorpp;
 
+/**
+ * DTO class for question attempts send to etutor system
+ */
 public class QuestionAttempt {
 
     String answer;
@@ -9,9 +12,21 @@ public class QuestionAttempt {
     int maxPoints;
     String questionBaseUrl;
 
+    /**
+     * Constructor
+     */
     public QuestionAttempt() {
     }
 
+    /**
+     * Constructor
+     * @param answer students answertext
+     * @param instruction of the question
+     * @param taskIdForDispatcher Id from the origin question in etutor system
+     * @param taskAssignmentTypeId from the  question in etutor system
+     * @param maxPoints reachable points
+     * @param questionBaseUrl location of questionbase
+     */
     public QuestionAttempt(String answer, String instruction, int taskIdForDispatcher, String taskAssignmentTypeId, int maxPoints, String questionBaseUrl) {
         this.answer = answer;
         this.instruction = instruction;

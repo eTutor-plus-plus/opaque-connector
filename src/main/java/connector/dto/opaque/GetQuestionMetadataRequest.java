@@ -2,28 +2,10 @@ package connector.dto.opaque;
 
 import javax.xml.bind.annotation.*;
 
-
 /**
- * <p>Java-Klasse für anonymous complex type.
- *
- * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
- *
- * <pre>
- * &lt;complexType&gt;
- *  *   &lt;complexContent&gt;
- *  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *  *       &lt;sequence&gt;
- *  *         &lt;element name="questionID" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *             &lt;element name="questionVersion" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *             &lt;element name="questionBaseURL" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *  *       &lt;/sequence&gt;
- *  *     &lt;/restriction&gt;
- *  *   &lt;/complexContent&gt;
- *  * &lt;/complexType&gt;
- * </pre>
- *
- *
+ *   class for questionMetaData request from opaque
  */
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
 @XmlRootElement(name = "getQuestionMetadata", namespace = "http://om.open.ac.uk/")

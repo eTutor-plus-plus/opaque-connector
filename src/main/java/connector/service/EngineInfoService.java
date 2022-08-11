@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 
+/**
+ * Service for opaque connection monitoring
+ */
 @Service
 public class EngineInfoService {
 

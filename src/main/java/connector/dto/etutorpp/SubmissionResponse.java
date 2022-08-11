@@ -1,8 +1,10 @@
 package connector.dto.etutorpp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * DTO class for received submissionresponse from etutor system
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SubmissionResponse {
 

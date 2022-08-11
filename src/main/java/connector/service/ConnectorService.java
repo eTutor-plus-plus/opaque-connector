@@ -16,12 +16,17 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 
-
+/**
+ *   Service, which sends requests to etutor system
+ */
 public class ConnectorService {
 
+    /**
+     * Get Taskmetadata from etutor system
+     * @param request from opaque to get the questionId
+     * @return task object
 
-    //TODO - Authentifizierungsdaten in COnfigDatei
-
+     */
     public Task getTaskMeta(GetQuestionMetadataRequest request ) throws IOException, InterruptedException, URISyntaxException {
 
         HttpClient client = HttpClient.newHttpClient();
@@ -42,6 +47,14 @@ public class ConnectorService {
     }
 
 
+    /**
+     * Get Taskdata from etutor system
+     * @param request from opaque to get the questionId
+     * @return task object
+     * @throws IOException
+     * @throws InterruptedException
+     * @throws URISyntaxException
+     */
     public Task getTaskInfo(StartRequest request ) throws IOException, InterruptedException, URISyntaxException {
 
         HttpClient client = HttpClient.newHttpClient();
@@ -61,6 +74,15 @@ public class ConnectorService {
 
     }
 
+    /**
+     * Send opaque submission to etutor system
+     * @param questionBaseUrl link to questionbase / questionengine
+     * @param submission submission object
+     * @return etutorresult
+     * @throws IOException
+     * @throws InterruptedException
+     * @throws URISyntaxException
+     */
     public EtutorResult sendSubmission(String questionBaseUrl, Submission submission ) throws IOException, InterruptedException, URISyntaxException {
 
         HttpClient client = HttpClient.newHttpClient();
@@ -79,7 +101,7 @@ public class ConnectorService {
                 .build();
 
         HttpResponse<String> response = client.send(nRequest, HttpResponse.BodyHandlers.ofString());
-        //TODO Exception Handling - no valid submission / no connection ...
+
         if (response.statusCode()== 200 || response.statusCode()== 202) {
 
             SubmissionResponse sResponse = objectMapper.readValue(response.body(), SubmissionResponse.class);
@@ -92,6 +114,16 @@ public class ConnectorService {
 
     }
 
+
+    /**
+     * Get submission from etutor system used by sendsubmission method
+     * @param questionBaseUrl link to questionbase / questionengine
+     * @param submissionId needed for locating the result
+     * @return etutorresult
+     * @throws IOException
+     * @throws InterruptedException
+     * @throws URISyntaxException
+     */
     public EtutorResult getResult(String questionBaseUrl, String submissionId ) throws IOException, InterruptedException, URISyntaxException {
 
         HttpClient client = HttpClient.newHttpClient();
@@ -112,7 +144,10 @@ public class ConnectorService {
     }
 
 
-
+    /**
+     * Create AuthenticationHeader
+     * @return
+     */
     private static final String getBasicAuthenticationHeader() {
         String auth = "admin:admin";
         byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.UTF_8));

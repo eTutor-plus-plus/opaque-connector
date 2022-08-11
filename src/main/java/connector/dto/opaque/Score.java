@@ -2,7 +2,9 @@ package connector.dto.opaque;
 
 import java.io.Serializable;
 
-
+/**
+ *  class for score object
+ */
 public class Score implements Serializable {
 
     String axis;

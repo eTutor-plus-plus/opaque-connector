@@ -13,6 +13,9 @@ import javax.xml.soap.SOAPException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+/**
+ *   Endpoint, which is called from opaque to process a question
+ */
 @Endpoint
 public class QuestionProcessEndpoint {
 

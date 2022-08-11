@@ -2,6 +2,9 @@ package connector.dto.etutorpp;
 
 import java.util.Map;
 
+/**
+ * DTO class for submissions send to etutor system
+ */
 
 public class Submission {
     private String submissionId;
