@@ -1,12 +1,9 @@
 package connector.service;
 
+import connector.dto.etutorpp.*;
 import connector.dto.opaque.GetQuestionMetadataRequest;
 import connector.dto.opaque.StartRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import connector.dto.etutorpp.Task;
-import connector.dto.etutorpp.EtutorResult;
-import connector.dto.etutorpp.Submission;
-import connector.dto.etutorpp.SubmissionResponse;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -56,9 +53,8 @@ public class ConnectorService {
      * Get Taskdata from etutor system
      * @param request from opaque to get the questionId
      * @return task object
-     * @throws IOException
-     * @throws InterruptedException
-     * @throws URISyntaxException
+     * @throws IOException throws no valid task found
+
      */
     public Task getTaskInfo(StartRequest request ) throws IOException, InterruptedException, URISyntaxException {
 
@@ -75,18 +71,47 @@ public class ConnectorService {
 
         HttpResponse<String> response = client.send(nRequest, HttpResponse.BodyHandlers.ofString());
         if (response.statusCode()== 200) return objectMapper.readValue(response.body(), Task.class);
-        throw new IOException("No valid task");
+        throw new IOException("No valid task found");
 
     }
+
+
+    /**
+     * Get TaskGroup from etutor system
+     * @param questionBaseUrl for taskgroup connection to etutor
+     * @return taskgroup object
+     * @throws IOException throws invalid task
+     */
+    public TaskGroup getTaskGroup(String questionBaseUrl, Task task  ) throws IOException, InterruptedException, URISyntaxException {
+
+        String[] taskGroupIdArray = task.getTaskGroupId().split("#");
+        String taskGroupId = taskGroupIdArray[1];
+
+        HttpClient client = HttpClient.newHttpClient();
+        ObjectMapper objectMapper = new ObjectMapper();
+        HttpRequest nRequest = HttpRequest.newBuilder()
+                .uri(new URI(questionBaseUrl +"/api/task-group/" + taskGroupId))
+                .version(HttpClient.Version.HTTP_1_1)
+                .header("Authorization", getBasicAuthenticationHeader())
+                .header("Content-Type", "text/plain")
+                .header("Accept-Language", "application/json")
+                .GET()
+                .build();
+
+        HttpResponse<String> response = client.send(nRequest, HttpResponse.BodyHandlers.ofString());
+        System.out.println(response.statusCode());
+        if (response.statusCode()== 200 ) return objectMapper.readValue(response.body(), TaskGroup.class);
+        throw new IOException("No valid taskGroupId");
+
+    }
+
 
     /**
      * Send opaque submission to etutor system
      * @param questionBaseUrl link to questionbase / questionengine
      * @param submission submission object
      * @return etutorresult
-     * @throws IOException
-     * @throws InterruptedException
-     * @throws URISyntaxException
+     * @throws IOException throws invalid submission
      */
     public EtutorResult sendSubmission(String questionBaseUrl, Submission submission ) throws IOException, InterruptedException, URISyntaxException {
 
@@ -125,11 +150,9 @@ public class ConnectorService {
      * @param questionBaseUrl link to questionbase / questionengine
      * @param submissionId needed for locating the result
      * @return etutorresult
-     * @throws IOException
-     * @throws InterruptedException
-     * @throws URISyntaxException
+     * @throws IOException Invalid result
      */
-    public EtutorResult getResult(String questionBaseUrl, String submissionId ) throws IOException, InterruptedException, URISyntaxException {
+    public EtutorResult getResult(String questionBaseUrl, String submissionId ) throws IOException, URISyntaxException, InterruptedException {
 
         HttpClient client = HttpClient.newHttpClient();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -166,14 +189,13 @@ public class ConnectorService {
 
     /**
      * Create AuthenticationHeader
-     * @return
+     * @return AuthenticationHeader for authentication on etutor
      */
 
-    private static final String getBasicAuthenticationHeader() {
+    final String getBasicAuthenticationHeader() {
 
         byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.UTF_8));
-        String authHeaderValue = "Basic " + new String(encodedAuth);
-        return authHeaderValue;
+        return "Basic " + new String(encodedAuth);
     }
 
 

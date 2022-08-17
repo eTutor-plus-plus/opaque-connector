@@ -15,6 +15,8 @@ public class Task {
     private String id;
     private String instruction;
     private String taskAssignmentTypeId;
+    private String taskGroupId;
+
 
     public Task() {
         this.taskIdForDispatcher = null;
@@ -22,6 +24,7 @@ public class Task {
         this.id = null;
         this.instruction = null;
         this.taskAssignmentTypeId = null;
+        this.taskGroupId = null;
     }
 
     public String getTaskIdForDispatcher() {
@@ -62,5 +65,13 @@ public class Task {
 
     public void setTaskAssignmentTypeId(String taskAssignmentTypeId) {
         this.taskAssignmentTypeId = taskAssignmentTypeId;
+    }
+
+    public String getTaskGroupId() {
+        return taskGroupId;
+    }
+
+    public void setTaskGroupId(String taskGroupId) {
+        this.taskGroupId = taskGroupId;
     }
 }

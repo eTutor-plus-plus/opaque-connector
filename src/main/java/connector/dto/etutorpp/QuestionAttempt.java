@@ -6,6 +6,9 @@ package connector.dto.etutorpp;
 public class QuestionAttempt {
 
     String answer;
+
+
+    String taskGroupDescription;
     String instruction;
     int taskIdForDispatcher;
     String taskAssignmentTypeId;
@@ -27,13 +30,16 @@ public class QuestionAttempt {
      * @param maxPoints reachable points
      * @param questionBaseUrl location of questionbase
      */
-    public QuestionAttempt(String answer, String instruction, int taskIdForDispatcher, String taskAssignmentTypeId, int maxPoints, String questionBaseUrl) {
+
+
+    public QuestionAttempt(String answer, String instruction, int taskIdForDispatcher, String taskAssignmentTypeId, int maxPoints, String questionBaseUrl, String taskGroupDescription) {
         this.answer = answer;
         this.instruction = instruction;
         this.taskIdForDispatcher = taskIdForDispatcher;
         this.taskAssignmentTypeId = taskAssignmentTypeId;
         this.maxPoints = maxPoints;
         this.questionBaseUrl = questionBaseUrl;
+        this.taskGroupDescription = taskGroupDescription;
     }
 
     public String getAnswer() {
@@ -82,5 +88,14 @@ public class QuestionAttempt {
 
     public void setQuestionBaseUrl(String questionBaseUrl) {
         this.questionBaseUrl = questionBaseUrl;
+    }
+
+
+    public String getTaskGroupDescription() {
+        return taskGroupDescription;
+    }
+
+    public void setTaskGroupDescription(String taskGroupDescription) {
+        this.taskGroupDescription = taskGroupDescription;
     }
 }

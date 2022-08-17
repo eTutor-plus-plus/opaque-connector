@@ -10,6 +10,8 @@ import connector.dto.opaque.ProcessRequest;
 import connector.dto.opaque.ProcessReturn;
 import connector.dto.opaque.Results;
 import connector.dto.opaque.Score;
+import org.springframework.web.util.HtmlUtils;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
@@ -49,11 +51,11 @@ public class QuestionProcessService {
         Score[] scores = new Score[1];
         Submission submission = new Submission();
 
-        //Mapping der übergebenen Name- und Value Arrays
+        //Mapping of Name- und Value Arrays
         String[] names = request.getNames();
         String[] values = request.getValues();
 
-        //List vor checking names
+        //List for checking names
         List<String> list = Arrays.asList(request.getNames());
 
         if (list.contains("-finish")) {
@@ -73,6 +75,7 @@ public class QuestionProcessService {
             questionAttempt.setTaskAssignmentTypeId(param.get("taskAssignmentTypeId"));
             questionAttempt.setMaxPoints(Integer.parseInt(param.get("maxPoints")));
             questionAttempt.setQuestionBaseUrl(param.get("questionBaseUrl"));
+            questionAttempt.setTaskGroupDescription((param.get("taskGroupDescription")));
 
         }
 
@@ -100,7 +103,7 @@ public class QuestionProcessService {
                 } else scores[0] = new Score(0);
                 finalresult.setScores(scores);
                 finalresult.setAnswerLine(questionAttempt.getAnswer());
-                finalresult.setQuestionLine(questionAttempt.getInstruction());
+                finalresult.setQuestionLine(questionAttempt.getTaskGroupDescription() + questionAttempt.getInstruction());
                 processReturn.setQuestionEnd(false);
                 processReturn.setResults(finalresult);
                 processReturn.setXHTML(createHtml(questionAttempt, false, false, false, gradingResult));
@@ -141,15 +144,17 @@ public class QuestionProcessService {
     private String createHtml(QuestionAttempt questionAttempt, boolean answer, boolean submit, boolean finish, EtutorResult result) {
 
         StringBuilder html = new StringBuilder();
+        html.append(questionAttempt.getTaskGroupDescription());
         html.append(questionAttempt.getInstruction());
         html.append("<div class =\"answer\">");
         html.append("<input type =\"hidden\"  name=\"%%IDPREFIX%%taskIdForDispatcher\" value =\" " + questionAttempt.getTaskIdForDispatcher() + "\" />");
         html.append("<input type =\"hidden\"  name=\"%%IDPREFIX%%taskAssignmentTypeId\" value =\" " + questionAttempt.getTaskAssignmentTypeId() + "\" />");
-        html.append("<input type =\"hidden\"  name=\"%%IDPREFIX%%instruction\" value =\" " + questionAttempt.getInstruction() + "\" />");
+        html.append("<input type =\"hidden\"  name=\"%%IDPREFIX%%taskGroupDescription\" value =\" " + HtmlUtils.htmlEscape(questionAttempt.getTaskGroupDescription()) + "\" />");
+        html.append("<input type =\"hidden\"  name=\"%%IDPREFIX%%instruction\" value =\" " + HtmlUtils.htmlEscape(questionAttempt.getInstruction()) + "\" />");
         html.append("<input type =\"hidden\"  name=\"%%IDPREFIX%%maxPoints\" value =\" " + questionAttempt.getMaxPoints() + "\" />");
         html.append("<input type =\"hidden\"  name=\"%%IDPREFIX%%questionBaseUrl\" value =\"" + questionAttempt.getQuestionBaseUrl() + "\" />");
 
-        if (answer == true) {
+        if (answer) {
             html.append("<textarea class =\"queanswer\"   id=\"%%IDPREFIX%%answer\"  name=\"%%IDPREFIX%%answer\" value =\"" + questionAttempt.getAnswer() + " \">" + questionAttempt.getAnswer() + " </textarea> </div>");
         } else {
             html.append("<textarea class =\"queanswer\" disabled   id=\"%%IDPREFIX%%answer\"  name=\"%%IDPREFIX%%answer\" value =\"" + questionAttempt.getAnswer() + " \">" + questionAttempt.getAnswer() + " </textarea> </div> ");
@@ -157,12 +162,12 @@ public class QuestionProcessService {
         }
         html.append("<div>");
 
-        if (submit == true) {
+        if (submit) {
             html.append("<input type=\"submit\" id=\"%%IDPREFIX%%-submit\" class=\"submit btn btn-secondary\" name=\"%%IDPREFIX%%-submit\"  value=\"Überprüfen\" />");
         }
 
 
-        if (finish == true) {
+        if (finish) {
             html.append(" <input type=\"submit\"  id=\"%%IDPREFIX%%finish\" class=\"btn btn-danger\" name=\"%%IDPREFIX%%finish\" value=\"Abgeben\"  />");
         }
 
