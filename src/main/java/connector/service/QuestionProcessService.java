@@ -35,7 +35,7 @@ public class QuestionProcessService {
     }
 
     /**
-     * Method for processing question
+     * Method for processing question and creating a new HTML form with the feedback
      * @param request contains answer infos
      * @return processReturn object contained in processResponse sent to opaque
      * @throws IOException
@@ -51,21 +51,24 @@ public class QuestionProcessService {
         Score[] scores = new Score[1];
         Submission submission = new Submission();
 
-        //Mapping of Name- und Value Arrays
+        //Mapping of Name- und Value Arrays - which are stored as key and value pairs in moodle database
         String[] names = request.getNames();
         String[] values = request.getValues();
 
         //List for checking names
         List<String> list = Arrays.asList(request.getNames());
 
+        //There are different given parameters from moodle opaque, which influences the behaviour of the question
+        //-finish: closes a question and after that it isnt editable anymore. Is called when quiz get closed
         if (list.contains("-finish")) {
             processReturn.setProgressInfo("Finish");
             processReturn.setQuestionEnd(true);
             processReturn.setResults(finalresult);
             processReturn.setXHTML("<p>Finished</p>");
             return processReturn;
-        }
+       }
 
+        // reads the key value pairs into an questionAttempt
         if (request.getNames() != null || request.getValues() != null) {
             Map<String, String> param = IntStream.range(0, names.length).boxed()
                     .collect(Collectors.toMap(i -> names[i], i -> values[i]));
@@ -79,6 +82,7 @@ public class QuestionProcessService {
 
         }
 
+        // and prepare the data for the etutor system
         if (questionAttempt.getAnswer() != null && !questionAttempt.getAnswer().isEmpty()) {
 
 
@@ -97,6 +101,7 @@ public class QuestionProcessService {
 
             gradingResult = cs.sendSubmission(questionAttempt.getQuestionBaseUrl(), submission);
 
+            //called when we finish a question with the "Abgeben" Button. A question get closed and isnt editable anymore
             if (list.contains("finish")) {
                 if (gradingResult.getPoints() == 1) {
                     scores[0] = new Score(questionAttempt.getMaxPoints());

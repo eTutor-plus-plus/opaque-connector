@@ -30,6 +30,14 @@ public class QuestionStartService {
         startReturn.setQuestionSession("0");
     }
 
+    /**
+     * Method to generate a HTML form for every quiz
+     * @param request Moodle Opaque request with questionID and questionbaseurl
+     * @return startReturn object which contains a HTML form
+     * @throws IOException if no valid task found
+     * @throws URISyntaxException if no valid uri
+     * @throws InterruptedException
+     */
     public StartReturn getStartReturn(StartRequest request) throws IOException, URISyntaxException, InterruptedException {
 
         Task task = cs.getTaskInfo(request);
@@ -45,6 +53,8 @@ public class QuestionStartService {
             taskGroupDescription = tempTaskGroupDescription.replace("rel=\"noopener noreferrer\" target=\"_blank\"", "");
         }
 
+        // Information is stored as key value pairs in moodle database and displayed as a HTML form in moodle
+        // It's import do save this data, because it's needed at the process service later
         startReturn.setXHTML(
                 taskGroupDescription +
                 task.getInstruction() +
