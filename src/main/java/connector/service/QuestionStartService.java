@@ -55,20 +55,27 @@ public class QuestionStartService {
 
         // Information is stored as key value pairs in moodle database and displayed as a HTML form in moodle
         // It's import do save this data, because it's needed at the process service later
-        startReturn.setXHTML(
-                taskGroupDescription +
-                task.getInstruction() +
-                        "<div class =\"answer\">" +
-                        "<input type =\"hidden\"  name=\"%%IDPREFIX%%taskIdForDispatcher\" value =\" " + task.getTaskIdForDispatcher() + "\" />" +
-                        "<input type =\"hidden\"  name=\"%%IDPREFIX%%taskGroupDescription\" value =\"" + HtmlUtils.htmlEscape(taskGroupDescription) + "\" />" +
-                        "<input type =\"hidden\"  name=\"%%IDPREFIX%%taskAssignmentTypeId\" value =\" " + task.getTaskAssignmentTypeId() + "\" />" +
-                        "<input type =\"hidden\"  name=\"%%IDPREFIX%%instruction\" value =\" " + HtmlUtils.htmlEscape(task.getInstruction()) + "\" />" +
-                        "<input type =\"hidden\"  name=\"%%IDPREFIX%%maxPoints\" value =\"" + task.getMaxPoints() + "\" />" +
-                        "<input type =\"hidden\"  name=\"%%IDPREFIX%%questionBaseUrl\" value =\"" + request.getQuestionBaseURL() + "\" />" +
-                        "<textarea class =\"queanswer\"   id=\"%%IDPREFIX%%answer\"  name=\"%%IDPREFIX%%answer\"> </textarea> </div>" +
-                        "<input type=\"submit\" id=\"%%IDPREFIX%%-submit\" name=\"%%IDPREFIX%%-submit\" class=\"submit btn btn-secondary\" value=\"Überprüfen\" /> "
 
-        );
+        StringBuilder html = new StringBuilder();
+        if (task.getTaskGroupId() != null && !task.getTaskGroupId().isEmpty()) {
+            html.append("<p><strong>Gruppen-Beschreibung</strong><p>");
+            html.append(taskGroupDescription);
+            html.append("<p></p>");
+        }
+        html.append("<p><strong>Aufgabenstellung</strong></p>");
+        html.append(task.getInstruction());
+        html.append("<div class =\"answer\">");
+        html.append("<input type =\"hidden\"  name=\"%%IDPREFIX%%taskIdForDispatcher\" value =\" " + task.getTaskIdForDispatcher() + "\" />");
+        html.append("<input type =\"hidden\"  name=\"%%IDPREFIX%%taskAssignmentTypeId\" value =\" " + task.getTaskAssignmentTypeId() + "\" />");
+        html.append("<input type =\"hidden\"  name=\"%%IDPREFIX%%taskGroupDescription\" value =\" " + HtmlUtils.htmlEscape(taskGroupDescription) + "\" />");
+        html.append("<input type =\"hidden\"  name=\"%%IDPREFIX%%instruction\" value =\" " + HtmlUtils.htmlEscape(task.getInstruction()) + "\" />");
+        html.append("<input type =\"hidden\"  name=\"%%IDPREFIX%%maxPoints\" value =\" " + task.getMaxPoints() + "\" />");
+        html.append("<input type =\"hidden\"  name=\"%%IDPREFIX%%questionBaseUrl\" value =\"" + request.getQuestionBaseURL() + "\" />");
+        html.append("<textarea class =\"queanswer\"   id=\"%%IDPREFIX%%answer\"  name=\"%%IDPREFIX%%answer\"> </textarea> </div>");
+        html.append("<input type=\"submit\" id=\"%%IDPREFIX%%-submit\" name=\"%%IDPREFIX%%-submit\" class=\"submit btn btn-secondary\" value=\"Überprüfen\" />");
+
+        startReturn.setXHTML(html.toString());
+
 
         startReturn.setCSS(
                 ".que.opaque .formulation  {width: 100%; background-color: #e7f3f5;  padding: 0.5rem 1rem} " +

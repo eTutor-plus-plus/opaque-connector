@@ -99,7 +99,6 @@ public class ConnectorService {
                 .build();
 
         HttpResponse<String> response = client.send(nRequest, HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.statusCode());
         if (response.statusCode()== 200 ) return objectMapper.readValue(response.body(), TaskGroup.class);
         throw new IOException("No valid taskGroupId");
 

@@ -149,7 +149,12 @@ public class QuestionProcessService {
     private String createHtml(QuestionAttempt questionAttempt, boolean answer, boolean submit, boolean finish, EtutorResult result) {
 
         StringBuilder html = new StringBuilder();
-        html.append(questionAttempt.getTaskGroupDescription());
+        if (questionAttempt.getTaskGroupDescription() != null && !questionAttempt.getTaskGroupDescription().isEmpty()) {
+            html.append("<p><strong>Gruppen-Beschreibung</strong><p>");
+            html.append(questionAttempt.getTaskGroupDescription());
+            html.append("<p></p>");
+        }
+        html.append("<p><strong>Aufgabenstellung</strong></p>");
         html.append(questionAttempt.getInstruction());
         html.append("<div class =\"answer\">");
         html.append("<input type =\"hidden\"  name=\"%%IDPREFIX%%taskIdForDispatcher\" value =\" " + questionAttempt.getTaskIdForDispatcher() + "\" />");
