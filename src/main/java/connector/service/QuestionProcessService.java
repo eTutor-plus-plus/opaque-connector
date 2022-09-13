@@ -150,24 +150,25 @@ public class QuestionProcessService {
 
         StringBuilder html = new StringBuilder();
         if (questionAttempt.getTaskGroupDescription() != null && !questionAttempt.getTaskGroupDescription().isEmpty()) {
-            html.append("<p><strong>Gruppen-Beschreibung</strong><p>");
+            html.append("<p><strong>Gruppen-Beschreibung</strong></p>");
             html.append(questionAttempt.getTaskGroupDescription());
             html.append("<p></p>");
         }
         html.append("<p><strong>Aufgabenstellung</strong></p>");
         html.append(questionAttempt.getInstruction());
+        System.out.println(questionAttempt.getInstruction());
         html.append("<div class =\"answer\">");
         html.append("<input type =\"hidden\"  name=\"%%IDPREFIX%%taskIdForDispatcher\" value =\" " + questionAttempt.getTaskIdForDispatcher() + "\" />");
         html.append("<input type =\"hidden\"  name=\"%%IDPREFIX%%taskAssignmentTypeId\" value =\" " + questionAttempt.getTaskAssignmentTypeId() + "\" />");
         html.append("<input type =\"hidden\"  name=\"%%IDPREFIX%%taskGroupDescription\" value =\" " + HtmlUtils.htmlEscape(questionAttempt.getTaskGroupDescription()) + "\" />");
-        html.append("<input type =\"hidden\"  name=\"%%IDPREFIX%%instruction\" value =\" " + HtmlUtils.htmlEscape(questionAttempt.getInstruction()) + "\" />");
+        html.append("<input type =\"hidden\"  name=\"%%IDPREFIX%%instruction\" value =\" "  + HtmlUtils.htmlEscape(questionAttempt.getInstruction()) + "\" />");
         html.append("<input type =\"hidden\"  name=\"%%IDPREFIX%%maxPoints\" value =\" " + questionAttempt.getMaxPoints() + "\" />");
         html.append("<input type =\"hidden\"  name=\"%%IDPREFIX%%questionBaseUrl\" value =\"" + questionAttempt.getQuestionBaseUrl() + "\" />");
 
         if (answer) {
-            html.append("<textarea class =\"queanswer\"   id=\"%%IDPREFIX%%answer\"  name=\"%%IDPREFIX%%answer\" value =\"" + questionAttempt.getAnswer() + " \">" + questionAttempt.getAnswer() + " </textarea> </div>");
+            html.append("<textarea class =\"queanswer\"   id=\"%%IDPREFIX%%answer\"  name=\"%%IDPREFIX%%answer\" value =\"" + HtmlUtils.htmlEscape(questionAttempt.getAnswer()) + " \">" + questionAttempt.getAnswer() + " </textarea> </div>");
         } else {
-            html.append("<textarea class =\"queanswer\" disabled   id=\"%%IDPREFIX%%answer\"  name=\"%%IDPREFIX%%answer\" value =\"" + questionAttempt.getAnswer() + " \">" + questionAttempt.getAnswer() + " </textarea> </div> ");
+            html.append("<textarea class =\"queanswer\" disabled   id=\"%%IDPREFIX%%answer\"  name=\"%%IDPREFIX%%answer\" value =\"" + HtmlUtils.htmlEscape(questionAttempt.getAnswer()) + " \">" + questionAttempt.getAnswer() + " </textarea> </div> ");
 
         }
         html.append("<div>");

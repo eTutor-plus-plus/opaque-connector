@@ -19,7 +19,7 @@ public class SOAPWebServiceConfig extends WsConfigurerAdapter {
         servlet.setApplicationContext(context);
         servlet.setTransformWsdlLocations(true);
 
-        return new ServletRegistrationBean(servlet, "/soapWS/*");
+        return new ServletRegistrationBean(servlet, "/etutorpp/*");
     }
 
 }

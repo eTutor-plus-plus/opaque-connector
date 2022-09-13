@@ -16,7 +16,7 @@ public class EngineInfoService {
 
     @PostConstruct
     public void intitalize() {
-        result.setEngineInfoResult("<engineinfo>\n" + "    <name> [Etutor++ Connector]</name>\n" + "</engineinfo>");
+        result.setEngineInfoResult("<engineinfo>\n" + "    <name> [eTutor++ Connector]</name>\n" + "</engineinfo>");
     }
 
     public Engineinfo getEngineResponse() {

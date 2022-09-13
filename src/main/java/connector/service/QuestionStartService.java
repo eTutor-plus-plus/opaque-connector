@@ -45,12 +45,14 @@ public class QuestionStartService {
 
         TaskGroup taskGroup;
         String taskGroupDescription = "";
+
         if (task.getTaskGroupId() != null && !task.getTaskGroupId().isEmpty()) {
             taskGroup = cs.getTaskGroup(request.getQuestionBaseURL(), task);
 
             //We have to add de link to the questionbase (etutor system)
-            String tempTaskGroupDescription = taskGroup.getDescription().replace("href=\"/","href=\"" + request.getQuestionBaseURL() + "/" );
-            taskGroupDescription = tempTaskGroupDescription.replace("rel=\"noopener noreferrer\" target=\"_blank\"", "");
+            taskGroupDescription = taskGroup.getDescription().replace("\"","'" );
+            taskGroupDescription = taskGroupDescription.replace("href='/","href='" + request.getQuestionBaseURL() + "/" );
+            taskGroupDescription = taskGroupDescription.replace("rel=\"noopener noreferrer\" target=\"_blank\"", "");
         }
 
         // Information is stored as key value pairs in moodle database and displayed as a HTML form in moodle
@@ -58,7 +60,7 @@ public class QuestionStartService {
 
         StringBuilder html = new StringBuilder();
         if (task.getTaskGroupId() != null && !task.getTaskGroupId().isEmpty()) {
-            html.append("<p><strong>Gruppen-Beschreibung</strong><p>");
+            html.append("<p><strong>Gruppen-Beschreibung</strong></p>");
             html.append(taskGroupDescription);
             html.append("<p></p>");
         }

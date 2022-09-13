@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "ETPPPASSWORD",
+      "type": "java.lang.String",
+      "description": "Description for ETPPPASSWORD."
+    },
+    {
+      "name": "ETPPUSER",
+      "type": "java.lang.String",
+      "description": "Description for ETPPUSER."
+    }
+  ] }
