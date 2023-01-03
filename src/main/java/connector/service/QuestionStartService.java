@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 @Service
 public class QuestionStartService {
-
+    private static final String ETUTOR_BASE_URL = "//etutor.dke.uni-linz.ac.at/etutorpp/";
     private StartReturn startReturn = new StartReturn();
     private ConnectorService cs = new ConnectorService();
 
@@ -51,7 +51,10 @@ public class QuestionStartService {
 
             //We have to add de link to the questionbase (etutor system)
             taskGroupDescription = taskGroup.getDescription().replace("\"","'" );
-            taskGroupDescription = taskGroupDescription.replace("href='/","href='" + request.getQuestionBaseURL() + "/" );
+            taskGroupDescription = taskGroupDescription.replace("href='/","href='");
+            taskGroupDescription = taskGroupDescription.replace("href='etutorpp","href='");
+            taskGroupDescription = taskGroupDescription.replace("href='/","href='");
+            taskGroupDescription = taskGroupDescription.replace("href='","href='" + ETUTOR_BASE_URL);
             taskGroupDescription = taskGroupDescription.replace("rel=\"noopener noreferrer\" target=\"_blank\"", "");
         }
 

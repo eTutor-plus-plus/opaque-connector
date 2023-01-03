@@ -113,7 +113,6 @@ public class ConnectorService {
      * @throws IOException throws invalid submission
      */
     public EtutorResult sendSubmission(String questionBaseUrl, Submission submission ) throws IOException, InterruptedException, URISyntaxException {
-
         HttpClient client = HttpClient.newHttpClient();
         ObjectMapper objectMapper = new ObjectMapper();
         String submissionRequest = objectMapper
@@ -152,7 +151,6 @@ public class ConnectorService {
      * @throws IOException Invalid result
      */
     public EtutorResult getResult(String questionBaseUrl, String submissionId ) throws IOException, URISyntaxException, InterruptedException {
-
         HttpClient client = HttpClient.newHttpClient();
         ObjectMapper objectMapper = new ObjectMapper();
         HttpRequest nRequest = HttpRequest.newBuilder()
@@ -167,7 +165,6 @@ public class ConnectorService {
         HttpResponse<String> response = client.send(nRequest, HttpResponse.BodyHandlers.ofString());
         if (response.statusCode()== 200) return objectMapper.readValue(response.body(), EtutorResult.class);
         throw new IOException("No valid result");
-
     }
 
     // Get values from application.properties

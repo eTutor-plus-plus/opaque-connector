@@ -15,6 +15,7 @@ public class EtutorResult {
     double points;
     double maxPoints;
     String result;
+    String report;
 
     public EtutorResult() {
     }
@@ -50,5 +51,4 @@ public class EtutorResult {
     public void setResult(String result) {
         this.result = result;
     }
-
 }
