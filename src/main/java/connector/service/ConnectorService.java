@@ -23,7 +23,11 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 public class ConnectorService {
+    @Value("${GRADING_TIMEOUT:500}")
+    long timeout;
 
+    @Value("${USE_TIMEOUT:true}")
+    boolean isTimeoutActive;
     /**
      * Get Taskmetadata from etutor system
      * @param request from opaque to get the questionId
@@ -134,16 +138,26 @@ public class ConnectorService {
         if (response.statusCode()== 200 || response.statusCode()== 202) {
 
             SubmissionResponse sResponse = objectMapper.readValue(response.body(), SubmissionResponse.class);
-            Thread.sleep(1500); // waits 1.5 seconds before requesting the result, as evaluation in dispatcher is asynchronous
+            if(isTimeoutActive)
+                timeout(timeout);
             return getResult(questionBaseUrl, sResponse.getSubmissionId());
-
         }
 
         else throw new IOException("No valid submission");
 
     }
 
-
+    private void timeout(long ms)
+    {
+        try
+        {
+            Thread.sleep(ms);
+        }
+        catch(InterruptedException ex)
+        {
+            Thread.currentThread().interrupt();
+        }
+    }
     /**
      * Get submission from etutor system used by sendsubmission method
      * @param questionBaseUrl link to questionbase / questionengine
