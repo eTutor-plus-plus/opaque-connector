@@ -16,6 +16,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.TimeUnit;
 
 /**
  *   Service, which sends requests to etutor system
@@ -133,7 +134,7 @@ public class ConnectorService {
         if (response.statusCode()== 200 || response.statusCode()== 202) {
 
             SubmissionResponse sResponse = objectMapper.readValue(response.body(), SubmissionResponse.class);
-
+            Thread.sleep(1500); // waits 1.5 seconds before requesting the result, as evaluation in dispatcher is asynchronous
             return getResult(questionBaseUrl, sResponse.getSubmissionId());
 
         }
