@@ -3,6 +3,7 @@ package connector.service;
 import connector.dto.etutorpp.QuestionAttempt;
 import connector.dto.etutorpp.EtutorResult;
 import connector.dto.etutorpp.Submission;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -14,10 +15,7 @@ import org.springframework.web.util.HtmlUtils;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -26,6 +24,12 @@ import java.util.stream.IntStream;
  */
 @Service
 public class QuestionProcessService {
+    static List<String> quotationMarksToBeReplaced = Arrays.asList("`", "´", "\"", "‚", "‘");
+    @Value("${REPLACE_QUOTATION_MARK:true}")
+    boolean replaceQuotationMarkForSubmission;
+
+    @Value("${REPLACEMENT_FOR_QUOTATION_MARK:'}")
+    String replacementForQuotationMarks;
 
     private ConnectorService cs = new ConnectorService();
 
@@ -87,7 +91,12 @@ public class QuestionProcessService {
 
 
             Map<String, String> passedAttributes = new HashMap<>();
-            passedAttributes.put("submission", questionAttempt.getAnswer());
+            var submissionString = questionAttempt.getAnswer();
+            if(replaceQuotationMarkForSubmission){ // For MAC, moodle uses ‚…‘ as default for quotation marks in the text editor, which fails in a query
+                for(String replace : quotationMarksToBeReplaced)
+                    submissionString = submissionString.replace(replace ,replacementForQuotationMarks);
+            }
+            passedAttributes.put("submission", submissionString);
             passedAttributes.put("action", "diagnose");
             passedAttributes.put("diagnoseLevel", "0");
 
