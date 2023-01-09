@@ -92,7 +92,7 @@ public class QuestionProcessService {
 
             Map<String, String> passedAttributes = new HashMap<>();
             var submissionString = questionAttempt.getAnswer();
-            if(replaceQuotationMarkForSubmission){ // For MAC, moodle uses ‚…‘ as default for quotation marks in the text editor, which fails in a query
+            if(replaceQuotationMarkForSubmission && questionAttempt.getTaskAssignmentTypeId().toLowerCase().contains("sql")){ // For MAC, moodle uses ‚…‘ as default for quotation marks in the text editor, which fails in a query
                 for(String replace : quotationMarksToBeReplaced)
                     submissionString = submissionString.replace(replace ,replacementForQuotationMarks);
             }
