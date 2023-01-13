@@ -24,7 +24,7 @@ import java.util.stream.IntStream;
  */
 @Service
 public class QuestionProcessService {
-    static List<String> quotationMarksToBeReplaced = Arrays.asList("`", "´", "\"", "‚", "‘");
+    static List<String> quotationMarksToBeReplaced = Arrays.asList("`", "´", "\"", "‚", "‘", "„");
     @Value("${REPLACE_QUOTATION_MARK:true}")
     boolean replaceQuotationMarkForSubmission;
 
