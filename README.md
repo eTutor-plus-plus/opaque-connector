@@ -38,3 +38,8 @@ from the view of this application, when running and deployed.**
 
 
 
+*Contact brandl@dke.uni-linz-ac.at to receive the bachelor thesis and the user-guide supporting this project
+
+
+
+
